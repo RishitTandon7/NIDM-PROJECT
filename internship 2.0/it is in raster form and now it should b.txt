@@ -1,0 +1,5 @@
+it is in raster form and now it should be saved in vector- geojson format 
+once i got geojson format - there will be atrubate table- attribute will be there
+then we will have geojson of eeach date and then each date will have 3 zonal geojson files geojson<date>glacier, geojson<date>glacier lake and geojson<date>non glacier
+
+
