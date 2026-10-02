@@ -76,3 +76,4 @@ def calculate_hillshade(dem, profile, azimuth=315, altitude=45):
 
 
 
+
