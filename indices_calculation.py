@@ -93,3 +93,4 @@ def calculate_vector_ruggedness_measure(dem, profile):
 
 
 
+
