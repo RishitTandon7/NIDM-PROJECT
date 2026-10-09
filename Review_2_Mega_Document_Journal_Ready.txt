@@ -1,0 +1,145 @@
+=========================================================================================
+AUTOMATED GLACIAL LAKE OUTBURST FLOOD (GLOF) VULNERABILITY CLASSIFICATION 
+AND WARNING GENERATION PIPELINE
+=========================================================================================
+PROJECT REVIEW 2 : ACADEMIC TECHNICAL REPORT
+
+-----------------------------------------------------------------------------------------
+CHAPTER 1: INTRODUCTION AND RESEARCH BACKGROUND
+-----------------------------------------------------------------------------------------
+
+1.1 Introduction to GLOF Hazards
+Glacial Lake Outburst Floods (GLOFs) present significant hydrological risks within the High Mountain Asia (HMA) region. The acceleration of glacial retreat, primarily driven by climatic variations, has resulted in the accumulation of substantial meltwater volumes behind unconsolidated terminal and lateral moraines. These natural barriers consist of loosely compacted glacial till and ice cores, lacking the long-term structural integrity necessary to accommodate increasing hydrostatic pressure. Rapid failure of these moraines can precipitate catastrophic downstream flooding, posing severe threats to adjacent settlements and critical infrastructure networks.
+
+1.2 Research Objectives
+Traditional methodologies for monitoring glacial hazard progression typically involve laborious manual digitization of satellite imagery or complex terrestrial surveying. Given the remoteness and structural instability of the targeted terrain, high-frequency physical monitoring is often unfeasible. Consequently, the primary objective of this research is to integrate high-resolution, multi-spectral remote sensing data with automated machine learning classification models and morphometric evaluation frameworks. This creates a systematized methodology to transition GLOF monitoring from localized observation to scalable, automated risk assessment.
+
+-----------------------------------------------------------------------------------------
+CHAPTER 2: DATA ACQUISITION AND PRE-PROCESSING
+-----------------------------------------------------------------------------------------
+
+2.1 Dataset Demographics and Specifications
+The research methodology relies on a triangulated data architecture, prioritizing high-resolution optical and elevation models. The utilized datasets are summarized in Table 2.1.
+
+Table 2.1: Primary Dataset Characteristics
+| Dataset | Resolution | Source / Provider | Period of Acquisition | Application |
+|---|---|---|---|---|
+| Sentinel-2 (MSI) | 10m / 20m | Google Earth Engine (GEE) | 2021 - 2025 | High-frequency hyper-spectral analysis |
+| Landsat-5 (TM) | 30m | Google Earth Engine (GEE) | 1988 - 2011 | Historical baseline comparison |
+| ASTER GDEM | 30m | NASA / METI | Static Baseline | Hydrological and Topographical extraction |
+
+2.2 Hydrological Processing Framework
+Initial spatial analysis involved utilizing the ASTER GDEM to execute a standardized hydrological mapping sequence. The DEM underwent a sink-filling process to eliminate localized interpolation errors. Flow direction and flow accumulation paths were subsequently delineated using the D8 deterministic algorithm. By plotting glacial lakes as focal pour points, 413 independent Micro-Watersheds (MWs) were successfully extracted and vectorized to establish the catchment parameters.
+
+[*** MODULE 1A OUTPUT REQUIREMENT: Insert the 1988-2023 'Individual Band' and 'FCC' grids here from your docx file to visually demonstrate the dataset retrieval and temporal progression. ***]
+
+-----------------------------------------------------------------------------------------
+CHAPTER 3: IMAGE PROCESSING AND CLASSIFICATION
+-----------------------------------------------------------------------------------------
+
+3.1 Multi-Spectral Index Computation
+Terrain element classification was performed through the calculation of Normalized Difference Indices, leveraging the varying electromagnetic reflectance signatures of the target topographies.
+
+* Normalized Difference Water Index (NDWI): NDWI = (Green - NIR) / (Green + NIR). Administered to isolate surface water bodies by contrasting reflectance in the visible green spectrum with the near-infrared spectrum.
+* Normalized Difference Snow Index (NDSI): NDSI = (Green - SWIR) / (Green + SWIR). Utilized to distinguish glacial ice and snow accumulation from surrounding barren landmasses.
+
+[*** INDEX COMPUTATION OUTPUT REQUIREMENT: Insert your Index Computation classified images (NDWI/NDSI outputs) here to demonstrate the extraction parameters. ***]
+
+3.2 Advanced Machine Learning Classification
+While standard boolean thresholding provides a baseline calculation, the methodology advanced to supervised Machine Learning models to mitigate errors arising from seasonal topologic shadowing. The Decision Tree (DT) classifier was identified as the optimal model following initial training cycles utilizing Sentinel-2 MSI datasets. The DT algorithm systematically categorized the terrain into three distinct zones: Glacier, Glacial Lake, and Non-Glacial terrain.
+
+[*** MODULE 1B OUTPUT REQUIREMENT: Insert your classification work here. Include the 'Raster' (66-scene classified maps) and the 'Vector Segmentation' QGIS boundaries. ***]
+
+-----------------------------------------------------------------------------------------
+CHAPTER 4: MORPHOMETRIC PARAMETER COMPUTATION
+-----------------------------------------------------------------------------------------
+
+To evaluate outburst vulnerability, the mapped spatial boundaries must be quantified against physical dimensions. The structural characteristics were segmented into three distinct evaluation categories, as summarized in Table 4.1.
+
+Table 4.1: Evaluated Morphometric Parameters
+| Category | Parameter | Formula / Derivation | Influence |
+|---|---|---|---|
+| Glacier | Accumulation Area Ratio (AAR) | Accumulation Area / Total Area | Indicates structural retreat and long-term ablation. |
+| Glacier | Snout Index (SI) | GDEM slope at terminus junction | Highlights risk of kinetic ice-calving events. |
+| Glacial Lake | Length/Width (L/W) Ratio | Geometric bounds of GeoJSON | Elongated lakes generate higher hydrodynamic tunneling. |
+| Catchment | Catchment Compactness (CCI) | 0.2821 * (Perimeter / √(Area)) | Circular basins generate sudden hydrostatic spikes during precipitation. |
+
+4.1 Glacier Parameters Computation
+The primary kinetic driver of a potential outburst flood is the instability of the parent ice mass. Computations within this category prioritized the Accumulation Area Ratio (AAR) and the Snout Index (SI). Analysis of the AAR indicates the proportional health of the glacier, where values falling significantly below 0.5 demonstrate severe ablation. Concurrently, the SI values determine the localized steepness of the glacial terminus, quantifying the probability of massive ice block displacement entering the lake.
+[*** MODULE 2 OUTPUT REQUIREMENT: Insert the 'Glacier Morphometric Computation' color maps here illustrating glacial physical decay. ***]
+
+4.2 Glacial Lake Parameters Computation
+This category evaluates the structural capacity of the water containment zone itself. The localized vertex geometry was assessed to calculate the Lake Length-to-Width (L/W) ratio. This parameter evaluates the hydrodynamic tunneling effect; significantly elongated lakes present higher risk profiles due to the amplification of internal displacement waves before contacting the moraine dam.
+[*** MODULE 3 OUTPUT REQUIREMENT: Insert the specific 'Glacial Lake Morphometric Computation' map outputs characterizing the water bodies here. ***]
+
+4.3 Catchment Parameters Computation
+Geomorphic evaluation of the broader valley was conducted on the 413 identified micro-watersheds. The Catchment Compactness Index (CCI) was computed to determine how rapidly precipitation within the entire basin funnels into the respective lake.
+[*** MODULE 4 OUTPUT REQUIREMENT: Insert the 'Ice Compactness Index (ICI)' colored 413 watershed map outputs here. ***]
+
+-----------------------------------------------------------------------------------------
+CHAPTER 5: GLOF INDEX AND SUSCEPTIBILITY ASSESSMENT
+-----------------------------------------------------------------------------------------
+
+The final generation of the susceptibility assessment aligns the segmented morphometric features—extracted from the glacier, lake, and catchment computations—directly into the Decision Tree classifier. The model rapidly evaluated the feature weights, synthesizing geometric dimensions and spectral characteristics. The model categorized total potential threat profiles along a 5-Tier gradient ranging from Very High to Very Low.
+
+[*** MODULE 5 (GLOF INDEX) OUTPUT REQUIREMENT: Insert the correct 'GLOF INDEX' analytical maps here showing the final calculated threat probability over the mountain ranges. Ensure only the finalized, correct warning output is presented here. ***]
+
+-----------------------------------------------------------------------------------------
+CHAPTER 6: ANALYSIS AND RESULTS
+-----------------------------------------------------------------------------------------
+
+6.1 Morphometric Correlation Analysis
+Analysis of the integrated outputs reveals critical relationships between the varying morphometric categories. Specifically, a comparative review between Glacier Parameters (e.g., AAR and Snout Index) and Glacial Lake Parameters (e.g., L/W Ratio) yielded significant insights. Lakes exhibiting elongated basin characteristics (high L/W ratio) that were structurally situated below extremely steep glacial termini (High Snout Index) demonstrated exponentially higher vulnerability thresholds in the Decision Tree models.
+
+The rapid decadal decline in the Accumulation Area Ratio fundamentally correlates with the physical expansion observed in the Glacial Lake parameters. As the glacier undergoes negative mass balance, the resultant meltwater accelerates the degradation of the ice-core moraine, which in turn acts as a positive feedback loop facilitating further dimensional expansion of the lake boundary.
+
+6.2 Resultant Risk Distribution
+The implementation of the comprehensive framework successfully isolated distinct threat variables across the 413 evaluated watersheds. By relying on deterministic equations and supervised Machine Learning classification rather than manual geomorphic interpretation, the project demonstrates a scalable, repeatable diagnostic approach capable of categorizing immense topographies against empirical data indices.
+
+-----------------------------------------------------------------------------------------
+CHAPTER 7: TERRESTRIAL GROUND-TRUTH VALIDATION
+-----------------------------------------------------------------------------------------
+
+To explicitly validate the probability metrics generated by the remote-sensing framework, an official field survey was executed across the East and North Sikkim topographies (Tista River Basin) under the NIDM-Funded GLOF Study between 19–28 December 2025. 
+
+7.1 Geomorphic Baseline Observations
+The expedition targeted the Tista River valley, documenting the infrastructural and geomorphic alterations sustained during the 2023 Chungthang GLOF event. Physical inspections observed severe riverbank erosion and extensive topographical changes. The ground-level severity witnessed in North Sikkim functions as empirical validation for the high-risk thresholds generated by the algorithm's Catchment Compactness Index estimations.
+
+7.2 Logistical Feasibility and Future Operations
+Observations in Lachung Valley and Yumesodong highlighted operational constraints, specifically that frozen lake surfaces during winter months blend heavily with adjacent snowfields, validating the reliance on rigorous NDSI parameters to differentiate solid terrain. Furthermore, the expedition verified target viability for future autonomous drone-based photogrammetry operations (e.g., Huang Valley, Sanglaphu Cho Lake), which will substitute 10-meter satellite limitations with sub-centimeter 3D moraine analytics in future deployments.
+
+[*** INSERT FIELD PHOTOGRAPHS HERE: Note: Ensure you use Koushani's photo, formatted properly with the specific Year indicated in the caption. ***]
+
+-----------------------------------------------------------------------------------------
+CHAPTER 8: CONCLUSION
+-----------------------------------------------------------------------------------------
+The developed methodology effectively validates the viability of autonomous disaster management analytical pipelines. Utilizing extensive temporal optics across a massive 66-scene Sentinel-2 batch dataset and historical Landsat-5 arrays, the implemented sequence successfully analyzed the geometric erosion of glacial mass and subsequent lake formation. Through the integration of ASTER DEM-based hydrological extraction, 413 micro-watersheds were delineated. The substitution of traditional manual mapping techniques for supervised Machine Learning (Decision Tree modeling), enhanced by structural morphometry (CCI, Snout Index, Accumulation Area Ratio), transitions foundational satellite imagery into standardized, mathematically actionable Warning Guidelines. The methodology acts as a comprehensive, highly scalable framework for mitigating the cascading dynamics associated with Glacial Lake Outburst Floods.
+
+=========================================================================================
+
+APPENDIX A: METADATA SERIALIZATION MATRICES
+-----------------------------------------------------------------------------------------
+The data serialized from the 413 Micro-Watershed geomathematical assessments was successfully archived into local comma-separated formats for diagnostic review by terrestrial management personnel.
+
+Data Sample A.1: Evaluated Glacier Vectors (`Glacier parameters.xlsx`)
+|   W_ID |   ELA_m | Date                |   SAZ |   Accum_Area_sqkm |   Glacier_Area_sqkm |        AAR |
+|-------:|--------:|:--------------------|------:|------------------:|--------------------:|-----------:|
+|      1 |    5795 | 1989-12-04 00:00:00 |     1 |        0.0454558  |          0.0453115  |   1.00318  |
+|    282 |    5435 | 1989-12-04 00:00:00 |     1 |        0.00336492 |          0.00400288 |   0.840626 |
+|    281 |     nan | 1989-12-04 00:00:00 |   nan |      nan          |        nan          | nan        |
+
+Data Sample A.2: Evaluated Lake Boundary Capabilities (`Glacial lake parameters.xlsx`)
+|   W_ID |   Lake_Length_m |   Lake_Mean_Width_m |   GLEQ | Year       |
+|-------:|----------------:|--------------------:|-------:|:-----------|
+|      1 |               0 |                   0 |      0 | 1989-12-04 |
+|    282 |               0 |                   0 |      0 | 1989-12-04 |
+|    281 |               0 |                   0 |      0 | 1989-12-04 |
+
+Data Sample A.3: Finalized Decision Tree Output Weights (`GLOF Index.xlsx`)
+|   W_ID |      ICI |    SI |      AAR |       GWAR |       HI |      CSI |    CCI |
+|-------:|---------:|------:|---------:|-----------:|---------:|---------:|-------:|
+|      1 | 0.107235 | 0.542 | 1.00318  | 0.490643   | 0.630365 | 1.72137  | 1.2589 |
+|    282 | 0.15193  | 0.857 | 0.840626 | 0.00874025 | 0.46427  | 0.185364 | 1.9546 |
+|    281 | 0        | 0     | 0        | 0          | 0.490963 | 0.185729 | 1.1225 |
+
+=========================================================================================
