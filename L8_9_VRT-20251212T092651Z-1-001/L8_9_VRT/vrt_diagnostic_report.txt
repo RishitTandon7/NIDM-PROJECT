@@ -1,0 +1,45 @@
+VRT DIAGNOSTIC REPORT
+================================================================================
+
+Directory: F:\NIDM-SRM Drone Project Docs\L8_9_VRT-20251212T092651Z-1-001\L8_9_VRT
+Total VRT files: 31
+Missing TIFF files: 31
+
+MISSING FILES:
+--------------------------------------------------------------------------------
+Landsat8_2014-11-07.tif
+Landsat8_2014-12-25.tif
+Landsat8_2015-12-28.tif
+Landsat8_2016-10-27.tif
+Landsat8_2016-12-30.tif
+Landsat8_2017-01-15.tif
+Landsat8_2017-02-16.tif
+Landsat8_2017-12-17.tif
+Landsat8_2018-01-02.tif
+Landsat8_2018-01-18.tif
+Landsat8_2018-12-20.tif
+Landsat8_2020-12-25.tif
+Landsat8_2021-11-10.tif
+Landsat8_2022-01-29.tif
+Landsat8_2022-11-29.tif
+Landsat8_2023-01-16.tif
+Landsat8_2023-02-01.tif
+Landsat8_2023-02-17.tif
+Landsat8_2023-11-16.tif
+Landsat8_2024-12-20.tif
+Landsat9_2021-12-20.tif
+Landsat9_2022-11-05.tif
+Landsat9_2022-11-21.tif
+Landsat9_2022-12-07.tif
+Landsat9_2022-12-23.tif
+Landsat9_2023-01-08.tif
+Landsat9_2023-01-24.tif
+Landsat9_2023-11-24.tif
+Landsat9_2023-12-26.tif
+Landsat9_2024-01-11.tif
+Landsat9_2024-12-12.tif
+
+
+
+
+

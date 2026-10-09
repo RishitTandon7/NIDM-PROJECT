@@ -1,0 +1,31 @@
+VRT DIAGNOSTIC REPORT - LANDSAT 5
+================================================================================
+
+Directory: f:\NIDM-SRM Drone Project Docs\L5_VRT
+Total VRT files: 17
+Missing TIFF files: 17
+
+MISSING FILES:
+--------------------------------------------------------------------------------
+Landsat5_1988-12-01.tif
+Landsat5_1989-12-04.tif
+Landsat5_1991-11-08.tif
+Landsat5_1995-01-03.tif
+Landsat5_1996-11-05.tif
+Landsat5_1996-12-23.tif
+Landsat5_1998-12-29.tif
+Landsat5_2000-10-31.tif
+Landsat5_2000-11-16.tif
+Landsat5_2000-12-18.tif
+Landsat5_2001-01-19.tif
+Landsat5_2004-12-29.tif
+Landsat5_2007-01-04.tif
+Landsat5_2008-12-08.tif
+Landsat5_2009-01-09.tif
+Landsat5_2009-02-10.tif
+Landsat5_2009-03-14.tif
+
+
+
+
+
