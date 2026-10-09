@@ -1,0 +1,46 @@
+1. Application
+
+	2. Event-Driven Architecture
+	Note: For the purpose of the Glacial Lake Outburst Flood (GLOF) Vulnerability Classification Pipeline, the "Event-Driven" architecture path was selected over Microservices or Serverless architectures. 
+
+	Explanation: The remote-sensing pipeline does not require continuous user-facing execution. Instead, the autonomous Python system remains dormant until triggered by an external data availability event. Specifically, the system executes sequentially when Google Earth Engine (GEE) triggers the ingestion of a new temporal optical scene (a Sentinel-2 5-day overpass or Sentinel-1 12-day SAR pulse). 
+	Once the raw .tif array ingestion event occurs, the system utilizes a cascading trigger mechanism where Image Pre-processing (NDWI/NDSI extraction) triggers the Decision Tree (DT) classifier. The generation of the spatial boundaries by the DT subsequently triggers the evaluation of the 413 micro-watershed morphometric parameters (AAR, SI, L/W Ratio, CCI), culminating in the generation of the GLOF Susceptibility Index.
+
+2. Database
+
+	1. ER Diagram (Entity-Relationship Logic)
+	Because this is a geospatial analytics project processing highly complex topographical matrices, the database architecture is deployed locally as a flat-file relational array. The Entities are physically serialized as Excel spreadsheets (.xlsx).
+	
+	The entire relational database is bound by a strict one-to-one relationship using a single Primary Key: 'W_ID' (Micro-Watershed ID ranging from 1 to 413).
+	
+	* Entity 1: Glacier Parameters (Attributes: W_ID [PK], Accum_Area, Snout Index, AAR)
+	* Entity 2: Glacial Lake Parameters (Attributes: W_ID [PK], Lake Length, Mean Width, L/W Ratio)
+	* Entity 3: Final Output Warning (Attributes: W_ID [PK], GLOF Hazard Score, Date)
+	
+	Relationship Statement: Each distinct Micro-Watershed (W_ID) is relationally joined to exactly one parent glacier parameter row and one terminal lake parameter row to compute the final mathematical Warning Score array. (See the generated UML Component diagram for visual reference).
+
+	2. Schema Design
+	Table Name: tb_glof_index
+	* W_ID (Integer, Primary Key)
+	* ICI [Ice Compactness Index] (Float)
+	* SI [Snout Index] (Float)
+	* AAR [Accumulation Area Ratio] (Float)
+	* CCI [Catchment Compactness Index] (Float)
+	* Hazard_Score (String: Very High, High, Medium, Low, Very Low)
+	* Year (Date/Timestamp)
+
+3. Data Exchange Contract
+
+	1. Frequency of data exchanges
+	* Dynamic / Temporal Processing: Data exchanges occur continuously every 5 to 12 days, aligning rigidly with the orbital sensing cycles of the Sentinel-2 (Optical) and Sentinel-1 (Radar) constellations over the Sikkim topographies.
+	* Historical Deep Computing: Data exchanges operate in highly dense, automated bursts when evaluating legacy progression using the 1988–2023 Landsat baseline archives.
+
+	2. Data Sets
+	The architectural pipeline processes and outputs three disparate geospatial formats:
+	* Multi-Spectral Raster Matrices: Raw spectral array data capturing the immediate Top-of-Atmosphere reflectance values, maintaining structural 10-meter accuracy (.tif format).
+	* Coordinate Vectorization: Sharp geometric latitude/longitude vertices capturing the physical bounding border of the classified lakes and glaciers (.geojson format).
+	* Numerical Morphometry: The finalized physical parameter metadata used exclusively for the threat calculation (.xlsx tabular formats).
+
+	3. Mode of Exchanges (API, File, Queue etc.,)
+	* API (Application Programming Interface): Initial source-data ingestion utilizes the Google Earth Engine (GEE) Python API, directly communicating with external Copernicus and USGS terrestrial servers.
+	* Local File I/O Serialization: Internal analytical data paths exchange heavily via local memory processing (Pandas and Rasterio libraries), rapidly reading enormous multi-decadal raster arrays and serializing them into lightweight GIS-readable formats without utilizing queue mechanisms.
