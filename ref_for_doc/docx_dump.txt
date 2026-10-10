@@ -1,0 +1,11 @@
+Module 1A: Data Acquisition and Image pre-Processing
+Individual Band
+FCC
+Module 1B: Image Processing – classification of Glacier, Glacial Lake and Non-glacier land
+Raster
+Vector Segmentation
+Module 2: Glacier Morphometric Computation
+Module 3: Glacial Lake Morphometric Computation
+Module 4: Catchment Morphometric Computation
+Module 5: GLOF INDEX
+Module 6: Issue Warning
