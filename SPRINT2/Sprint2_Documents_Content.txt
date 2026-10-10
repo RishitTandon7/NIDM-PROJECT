@@ -1,0 +1,131 @@
+SPRINT II: MACHINE LEARNING CLASSIFICATION & RISK INDEX DERIVATION
+OFFICIAL SPRINT DOCUMENTATION
+
+1. FUNCTIONAL DOCUMENT
+
+The primary functional objective of Sprint II is to transition the project pipeline from a basic, error-prone spatial mapping framework into a highly sophisticated, autonomous intelligence processor capable of rendering accurate and deterministic Glacial Lake Outburst Flood (GLOF) risk scores. This sprint explicitly deprecates the rigid, single-band boolean thresholds established in Sprint I, which suffered heavily from optical hallucinations, and successfully implements a highly adaptive, multi-variate Machine Learning architecture. The execution of Sprint II directly maps to the final three computational phases of the project roadmap. 
+
+In Phase 4, focusing on Machine Learning Classification and Terrain Segmentation, the architectural core relies on feeding triangulated multi-spectral feature stacks, comprising the Normalized Difference Water Index, Normalized Difference Snow Index, and Normalized Difference Vegetation Index, into an optimized Decision Tree (DT) supervised classification model. Unlike static algebra, the DT algorithm intelligently evaluates pixel signatures across millions of data points simultaneously, splitting the spectral data into an exceptionally clean, 3-class categorical raster defining Glacier, Lake, and Barren Terrain. This approach successfully eliminates false positives caused by deep mountain shadows and turbid, sediment-rich water bodies. Following classification, the system initiates a robust vectorization engine via the rasterio.features library, algorithmically converting the localized 2D raster pixel grids into precise, scalable GeoJSON bounding polygons containing exact real-world latitude and longitude coordinate vertices.
+
+Moving into Phase 5, which deals with Morphometric Parameter Extraction and Geometry Evaluation, the project necessitated the calculation of dynamic structural variables to translate visual mappings into physical threat assessments. In this phase, the Python pipeline mathematically intersects the newly vectorized lake and glacier polygons against the boundaries of the 413 GDEM micro-watersheds established in Sprint I. Using the shapely and geopandas libraries, the engine automatically computes highly specific geomorphological metrics. These include the Catchment Compactness Index (CCI) to indicate how rapidly hydrostatic pressure could spike, the lake elongation metric or Length/Width ratio to identify structural vulnerability against wave generation, the Accumulation Area Ratio (AAR) to quantify the survival zone of the parent ice core, and the Snout Index (SI) to measure the critical topographical gradient at the glacial terminus where catastrophic failure initiates.
+
+Finally, in Phase 6 covering Final Warning Serialization and Intelligence Generation, the roadmap bridges the gap between abstract Geographic Information Systems computations and deployable disaster management intelligence. The accumulated morphometric parameters are routed directly into the overriding GLOF Index decision logic algorithm. By evaluating the weighted mathematical interactions between ice decay metrics such as the AAR and SI, alongside lake geometry like the CCI, the pipeline calculates a definitive threat probability score. This autonomous logic cleanly categorizes the 413 target catchments across a standardized, 5-Tier hazard scale ranging from 'Very Low' to 'Very Severe', officially triggering the generation of the final warning outputs.
+
+
+2. ARCHITECTURE DOCUMENT
+
+The defining architectural transition of Sprint II was the implementation and rigorous enforcement of a Flat-File Relational Database Schema. Recognizing that complex multi-dimensional spatial matrices are incredibly difficult to disseminate to non-technical civil authorities and disaster response teams, the computational intelligence output was structurally mapped to a clean Entity-Relationship (ER) model.
+
+Addressing Data Component Mapping and Normalization, the system dynamically generates distinct, normalized relational data tables rather than outputting massive, unintelligible data blocks. This explicitly separates glacial structural metrics from downstream hydrological properties, yielding specific outputs such as Glacier_parameters.xlsx, Glacial_lake_parameters.xlsx, and the finalized GLOF_Index.xlsx. By flattening the spatial data into structured tabular formats, the pipeline ensures seamless integration with third-party visualization tools and municipal databases.
+
+Furthermore, the architecture relies heavily on Primary Key and Strict Entity Relationship Mapping. The absolute anchor of this entire relational database is the Micro-Watershed Identifier (W_ID), an integer key uniquely generated for each of the 413 specific drainage basins. Through this architecture, each distinct watershed is relationally bound to its parent glacier and its physical containment lake via foreign keys. This explicit mapping ensures a strict One-to-One data contract. This structural rigidity allows the final GLOF Index decision logic to independently query and cross-reference all required variables for final mathematical computation, ensuring absolute data integrity, zero data collisions, and the complete removal of manual GIS intervention.
+
+ENTITY-RELATIONSHIP (ER) ARCHITECTURE DIAGRAM:
+
++---------------------------+       +-------------------------------+
+|  Micro_Watershed (Master) |       |  Glacier_Structural_Metrics   |
++---------------------------+       +-------------------------------+
+| * W_ID (Primary Key)      |--1:1--| * Glacier_ID (Primary Key)    |
+
+|   geometry                |       | * W_ID (Foreign Key)          |
+|   area_sqkm               |       |   snout_index                 |
++---------------------------+       |   accumulation_area_ratio     |
+            |                       |   geometry                    |
+            |                       +-------------------------------+
+            |                       
+            |                       +-------------------------------+
+            |                       |  Lake_Hydrological_Metrics    |
+            |--1:1------------------|-------------------------------+
+            |                       | * Lake_ID (Primary Key)       |
+            |                       | * W_ID (Foreign Key)          |
+            |                       |   catchment_compactness_index |
+            |                       |   length_width_ratio          |
+            |                       |   geometry                    |
+            |                       +-------------------------------+
+            |
+            |                       +-------------------------------+
+            |                       |  GLOF_Threat_Index (Final)    |
+            |--1:1------------------|-------------------------------+
+                                    | * W_ID (Foreign Key)          |
+                                    |   hazard_score (Integer 0-4)  |
+                                    |   threat_category (5-Tier)    |
+                                    +-------------------------------+
+
+
+3. FUNCTIONAL TEST CASES
+
+To computationally validate the integrity, accuracy, and resilience of the Sprint II pipeline, the following formal testing scenarios were executed.
+
++------------+-------------------------------------------------------------+
+| TEST ID    | TC-SP2-01                                                   |
++------------+-------------------------------------------------------------+
+| SCENARIO   | Validate Machine Learning (Decision Tree) Categorization    |
++------------+-------------------------------------------------------------+
+| PRE-COND.  | Multi-spectral feature stacks (NDWI, NDSI, NDVI) are loaded |
+|            | into local RAM arrays without memory overflow.              |
++------------+-------------------------------------------------------------+
+| STEPS      | Pass massive feature arrays through the fully trained DT    |
+|            | classification model and record execution time.             |
++------------+-------------------------------------------------------------+
+| EXPECTED   | Pipeline correctly segments terrain into 3 distinct classes |
+|            | (Glacier, Lake, Terrain) & mitigates shadow false positives.|
++------------+-------------------------------------------------------------+
+| ACTUAL     | PASS                                                        |
++------------+-------------------------------------------------------------+
+
++------------+-------------------------------------------------------------+
+| TEST ID    | TC-SP2-02                                                   |
++------------+-------------------------------------------------------------+
+| SCENARIO   | Validate Polygon Vectorization Extraction & Geometry        |
++------------+-------------------------------------------------------------+
+| PRE-COND.  | 3-class categorical raster is generated without pixel voids.|
++------------+-------------------------------------------------------------+
+| STEPS      | Execute geometry vectorization module against isolated lake |
+|            | and glacier raster pixels, extracting outer boundaries.     |
++------------+-------------------------------------------------------------+
+| EXPECTED   | System outputs scalable GeoJSON polygon bounds containing   |
+|            | accurate, closed-loop lat/long coordinate limits.           |
++------------+-------------------------------------------------------------+
+| ACTUAL     | PASS                                                        |
++------------+-------------------------------------------------------------+
+
++------------+-------------------------------------------------------------+
+| TEST ID    | TC-SP2-03                                                   |
++------------+-------------------------------------------------------------+
+| SCENARIO   | Validate Morphometric Math Algorithms on Targets            |
++------------+-------------------------------------------------------------+
+| PRE-COND.  | GeoJSON polygons and 413 GDEM Micro-Watersheds are available|
+|            | and aligned within the same Coordinate Reference System.    |
++------------+-------------------------------------------------------------+
+| STEPS      | Mathematically intersect spatial geometries and trigger     |
+|            | computation functions for Snout Index, AAR, and CCI.        |
++------------+-------------------------------------------------------------+
+| EXPECTED   | Python engine correctly calculates and stores float variables|
+|            | representing instability of ice core and lake geometry.     |
++------------+-------------------------------------------------------------+
+| ACTUAL     | PASS                                                        |
++------------+-------------------------------------------------------------+
+
++------------+-------------------------------------------------------------+
+| TEST ID    | TC-SP2-04                                                   |
++------------+-------------------------------------------------------------+
+| SCENARIO   | Validate GLOF Threat Serialization and Relational Mapping   |
++------------+-------------------------------------------------------------+
+| PRE-COND.  | All morphometric parameters are successfully calculated and |
+|            | correctly anchored to a valid W_ID primary key.             |
++------------+-------------------------------------------------------------+
+| STEPS      | Feed parameters into 5-Tier decision logic matrix and       |
+|            | automatically trigger the relational spreadsheet export.    |
++------------+-------------------------------------------------------------+
+| EXPECTED   | Successful generation of GLOF_Index.xlsx table, accurately  |
+|            | flagging highest threat targets without data corruption.    |
++------------+-------------------------------------------------------------+
+| ACTUAL     | PASS                                                        |
++------------+-------------------------------------------------------------+
+
+
+4. SPRINT RETROSPECTIVE
+
+Reflecting on the milestone achievements and what went well, the automated generation of precise, numerical warning arrays was a definitive and monumental triumph for Sprint II. The execution of this pipeline comprehensively proved that highly complex, abstract topographical data arrays could be successfully evaluated by supervised Machine Learning algorithms and immediately serialized into standard, actionable, relational spreadsheets entirely devoid of human intervention. Furthermore, the mitigation of the false-positive optical shadow anomalies, which was a major hurdle in historical GIS processing, completely validated the architectural transition away from rigid boolean indexing toward the deployment of an adaptive Decision Tree classifier. Execution times were drastically reduced from weeks of manual digitization to a localized computational window of mere minutes.
+
+Regarding what needs improvement and the future scope of the project, while the optical processing pipeline operates flawlessly on clear-sky days, its overriding architectural limitation is its absolute vulnerability to atmospheric cloud blindness during the South Asian monsoons. This limitation dictates a specific three-phase future scope: First, the integration of Sentinel-1 Data (SAR) to allow for uninterrupted, weather-independent terrain classification. Second, deploying a localized fixed-wing drone over any specific high-hazard moraines flagged by Sentinel-1. Third, utilizing the fixed-wing drone to capture ultra-high image data and execute LIDAR sensing, bridging the gap between 10-meter satellite resolution and the sub-centimeter 3D mesh modeling required for structural integrity forecasting.

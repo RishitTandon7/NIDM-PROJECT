@@ -1,0 +1,26 @@
+Scene: Sentinel2_2021-11-08
+
+Pipeline stages:
+1. Load Sentinel-2 bands (B2, B3, B4, B8, B11)
+2. Compute NDWI, NDSI, NDVI, and average visible brightness
+3. Detect raw lake candidates using NDWI and NIR thresholding
+4. Suppress shadow-driven false positives
+5. Detect glacier candidates using NDSI and brightness
+6. Remove overlaps and small speckle regions
+7. Produce final class map
+
+Pixel statistics:
+- Raw lake candidate pixels: 303197
+- Shadow pixels filtered: 507930
+- Final lake pixels: 291043
+- Final glacier pixels: 1940727
+- Final non-glacier pixels: 819230
+
+Object statistics:
+- Final lake polygons/components: 1152
+- Final glacier polygons/components: 1284
+
+Class labels:
+- 0: Non-glacier / background
+- 1: Glacier
+- 2: Glacier lake
