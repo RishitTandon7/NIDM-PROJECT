@@ -1,0 +1,68 @@
+VRT DIAGNOSTIC REPORT - LISS-4
+================================================================================
+
+Directory: f:\NIDM-SRM Drone Project Docs\Liss4Clip_VRT-20251212T092648Z-1-001\Liss4Clip_VRT
+Total VRT files: 54
+Missing files: 54
+
+MISSING FILES:
+--------------------------------------------------------------------------------
+D:\GLOF Liss 4\Liss4_VRT\R2F01DEC2017_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F02NOV2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F03APR2023_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F03FEB2025_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F05APR2017_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F06FEB2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F07JAN2021_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F09DEC2021_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F10JAN2015_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F10NOV2022_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F12DEC2015_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F12NOV2016_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F14FEB2023_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F15JAN2015_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F16JAN2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F17DEC2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F17MAR2016_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F19OCT2017_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F20DEC2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F20NOV2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F21APR2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F22OCT2021_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F24APR2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F25MAR2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F25OCT2015_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F28DEC2022_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F29JAN2016_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F30DEC2016_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\R2F30OCT2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF01JAN2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF02FEB2023_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF03DEC2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF03JAN2025_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF03MAR2022_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF03NOV2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF04JAN2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF06APR2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF08MAR2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF11MAR2025_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF13DEC2017_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF14NOV2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF16DEC2022_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF16NOV2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF16OCT2019_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF19MAR2018_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF20JAN2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF22JAN2025_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF25APR2020_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF26OCT2017_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF27MAR2021_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF27NOV2021_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF29OCT2022_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF29SEP2024_bands.vrt
+D:\GLOF Liss 4\Liss4_VRT\RAF30JAN2018_bands.vrt
+
+
+
+
+
